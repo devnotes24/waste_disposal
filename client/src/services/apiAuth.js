@@ -22,7 +22,7 @@ export async function login({ email, password }) {
       }
 
     const token = getToken();
-
+    console.log(token);
     return token;
   } catch (error) {
     console.error('There was an error logging in:', error);

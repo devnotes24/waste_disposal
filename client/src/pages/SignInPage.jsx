@@ -29,14 +29,15 @@ function SignInPage() {
 
     try {
       const token = await login(data); // Await the login function
-
-      setIsAuthenticated(true)
+      console.log(token);
+      
       if (token) {
+        setIsAuthenticated(true)
         navigate('/'); // Navigate if login is successful
       }
       else {
         console.log("Invalid credentials");
-        alert("Invalid credentials");
+        // alert("Invalid credentials");
       }
       
     } catch (error) {

@@ -4,7 +4,6 @@ import { useGlobalState } from '../context/useGlobalState';
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useGlobalState();
-
   // If not authenticated, redirect to login
   if (!isAuthenticated) {
     // navigate("/")

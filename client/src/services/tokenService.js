@@ -6,6 +6,7 @@ export const getToken = () => {
   // Retrieve token from cookies
   const token = Cookies.get('authToken');
   // Check if the token exists
+  console.log(token);
   if (token) {
     try {
       // Decode the token

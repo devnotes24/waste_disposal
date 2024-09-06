@@ -15,7 +15,7 @@ function GlobalStateProvider({ children }) {
 
 
     const token = getToken();
-  
+
     useEffect(() => {
       setIsAuthenticated(!!token);
     }, [ token , setIsAuthenticated]);
