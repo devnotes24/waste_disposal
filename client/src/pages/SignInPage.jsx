@@ -88,7 +88,7 @@ function SignInPage() {
               textAlign: 'center',
             }}
           >
-            Welcome Back
+            Login
           </Typography>
 
           <Box
