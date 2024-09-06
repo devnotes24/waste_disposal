@@ -16,11 +16,12 @@ export async function login({ email, password }) {
       // alert('Login failed:', response.data.error);
       // throw new Error(response.data.error); // Throw error to handle in the component
     }
-    else if(response.data.success)
+    else if(response.data.token && response.data.token!==null && response.data.token!==undefined)
       {
+        localStorage.setItem('authToken', response.data.token);
         alert(response.data.success);
-      }
-
+      } 
+    
     const token = getToken();
     console.log(token);
     return token;

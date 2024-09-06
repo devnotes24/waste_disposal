@@ -13,11 +13,11 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import ThemeButton from './ThemeButton';
+
 import FullscreenButton from './FullScreenButton';
 import { useGlobalState } from '../context/useGlobalState';
-import Cookies from 'js-cookie';
 
-const pages = [{label : "HOME" , path : ""},{label : "ABOUT" , path : "/about"},{label : "SERVICES" , path : "/services"},{label : "CONTACT" , path : "/contact"},];
+const pages = [{label : "HOME" , path : ""},{label : "ABOUT" , path : "/about"},{label : "SERVICES" , path : "/services"},{label : "CONTACT" , path : "/contact"},{label : "DEVELOPERS" , path : "/developerInfo"}];
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Header() {
@@ -40,7 +40,7 @@ function Header() {
   //logout function
   const handleLogout = () => {
     console.log("Logout cliicked");
-    Cookies.remove('authToken');
+    localStorage.removeItem('authToken');
     setIsAuthenticated(false);
     navigate("/");
     window.location.reload();
@@ -54,8 +54,9 @@ function Header() {
     navigate(path);
     handleCloseNavMenu();
   }
-  return (
+  return (<>
     <AppBar position="static">
+
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           
@@ -170,6 +171,7 @@ function Header() {
         </Toolbar>
       </Container>
     </AppBar>
+</>
   );
 }
 export default Header;

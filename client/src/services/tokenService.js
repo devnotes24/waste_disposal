@@ -1,10 +1,9 @@
 // tokenService.js
 import {jwtDecode} from 'jwt-decode';
-import Cookies from 'js-cookie';
 
 export const getToken = () => {
   // Retrieve token from cookies
-  const token = Cookies.get('authToken');
+  const token =  localStorage.getItem('authToken');
   // Check if the token exists
   console.log(token);
   if (token) {
@@ -16,7 +15,7 @@ export const getToken = () => {
       // Check if the token is expired
       if (decoded.exp < currentTime) {
         // Token is expired, remove it from cookies
-        Cookies.remove('authToken');
+        localStorage.removeItem('authToken');
         return null; // Return null if token is expired
       }
 
@@ -25,7 +24,7 @@ export const getToken = () => {
     } catch (error) {
       // Handle errors in decoding the token
       console.error('Error decoding token:', error);
-      Cookies.remove('authToken');
+      localStorage.removeItem('authToken');
       return null; // Return null if there's an error
     }
   }
