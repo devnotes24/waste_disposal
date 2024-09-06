@@ -10,11 +10,8 @@ const route = require('./routes/routes');
 
 const app = express();
 const allowedOrigins = [
-  'http://svb.local:3000',
-  'http://svb.local:3001',
+  'https://waste-disposal.vercel.app',
   'http://localhost:3000',
-  'https://devtest-7wh6.onrender.com',
-  'http://yet-another-frontend.local'
 ];
 
 app.use(cors({
