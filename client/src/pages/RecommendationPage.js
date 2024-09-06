@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './RecommendationPage.css';
 
@@ -31,7 +31,7 @@ const RecommendationPage = () => {
 
         const fetchNearbyPlaces = async (latitude, longitude) => {
             try {
-                const response = await fetch(`http://localhost:8000/gMapRt/nearby`, {
+                const response = await fetch(`https://waste-disposal-v1cm.onrender.com/gMapRt/nearby`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const RecommendationPage = () => {
                     setLocationName('Location not found');
                 }
             } catch (err) {
-                setError('Failed to fetch location name.');
+                setError('Failed to fetch location name.',err);
             }
         };
 
