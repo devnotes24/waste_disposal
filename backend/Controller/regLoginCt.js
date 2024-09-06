@@ -38,6 +38,7 @@ exports.login = async (req, res) => {
     });
     res.cookie('authToken', token, {
       httpOnly: false, // Make sure this is not set if you want JavaScript access
+      secure: true,
       sameSite: 'None',
       maxAge: 3600000 // 1 hour
     });
