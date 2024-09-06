@@ -31,7 +31,7 @@ const RecommendationPage = () => {
 
         const fetchNearbyPlaces = async (latitude, longitude) => {
             try {
-                const response = await fetch(`http://localhost:8000/gMapRt/nearby`, {
+                const response = await fetch(`https://waste-disposal-v1cm.onrender.com/gMapRt/nearby`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
