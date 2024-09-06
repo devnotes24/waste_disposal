@@ -55,7 +55,7 @@ function Header() {
     handleCloseNavMenu();
   }
   return (<>
-    <AppBar position="fixed">
+    <AppBar position="static">
 
       <Container maxWidth="xl">
         <Toolbar disableGutters>
