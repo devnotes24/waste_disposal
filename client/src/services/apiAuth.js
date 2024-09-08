@@ -19,7 +19,6 @@ export async function login({ email, password }) {
     else if(response.data.token && response.data.token!==null && response.data.token!==undefined)
       {
         localStorage.setItem('authToken', response.data.token);
-        alert(response.data.success);
       } 
     
     const token = getToken();
