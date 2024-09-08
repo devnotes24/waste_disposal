@@ -3,13 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { useTheme } from '@emotion/react';
 import { register } from '../services/apiRegister';
-
+import SimpleBackDrop from '../components/SimpleBackDrop';
+import toast from 'react-hot-toast';
 function SignUpPage() {
   const navigate = useNavigate();
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === 'dark';
   const formRef = useRef(null); // Create a ref for the form
   const [error, setError] = useState(null); // State to store error messages
+  const [loading , setIsLoading] = useState(false);
+
+  // Validation functions
+  function isAlphaOnly(str) {
+    return /^[A-Za-z]+$/.test(str);
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function isValidPassword(password) {
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
+  }
 
   async function handleFormSubmit(event) {
     event.preventDefault(); // Prevent the default form submit behavior
@@ -28,6 +43,26 @@ function SignUpPage() {
       return;
     }
 
+    if (!isAlphaOnly(name)) {
+      setError('First name should not contain numbers.');
+      return;
+    }
+
+    if (!isAlphaOnly(lastName)) {
+      setError('Last name should not contain numbers.');
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError('Invalid email address.');
+      return;
+    }
+
+    if (!isValidPassword(password)) {
+      setError('Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a digit, and a special character.');
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
       return;
@@ -36,28 +71,29 @@ function SignUpPage() {
     // Log or handle form data
     const data = { name, lastName, email, password };
     console.log({ name, lastName, email, password });
+
     try {
-        const response = await register(data); // Await the login function
+      setIsLoading(true)
+      const response = await register(data); // Await the login function
       console.log(response);
-        if (response.success) {
-          navigate('/signIn'); // Navigate if login is successful
-          alert("Registration successful")
-        }
-        else {
-          console.log("Sign Up failed");
-          alert("Sign Up failed");
-        }
-        
-      } catch (error) {
-        console.error('Sign up failed:', error);
-        alert("Sign Up failed");
-        // Display an error message to the user if necessary
+      if (response.success) {
+        navigate('/signIn'); // Navigate if login is successful
+        toast.success('Sign Up successful')
+      } else {
+        console.log("Sign Up failed");
+        toast.error('Sign Up failed')
       }
+    } catch (error) {
+      console.error('Sign up failed:', error);
+      toast.error('Sign Up failed')
+      // Display an error message to the user if necessary
+    }
+    finally{
+      setIsLoading(false)
+    }
 
     // Clear the error if form is valid
     setError(null);
-
-    // TODO: Add your form submission logic here (e.g., API call)
 
     // Reset the form after submission
     if (formRef.current) {
@@ -66,6 +102,8 @@ function SignUpPage() {
   }
 
   return (
+    <>
+    <SimpleBackDrop loading={loading}/>
     <Box
       sx={{
         display: 'flex',
@@ -79,7 +117,7 @@ function SignUpPage() {
         <Paper
           elevation={3}
           sx={{
-            p: {xs : 2 , sm : 3 , md : 4},
+            p: { xs: 2, sm: 3, md: 4 },
             borderRadius: 2,
             display: 'flex',
             flexDirection: 'column',
@@ -131,30 +169,32 @@ function SignUpPage() {
             noValidate
             autoComplete="off"
           >
-            <Box sx={{display : "flex" , gap : 2 }}>
-            <TextField
-            size = "small"
-              label="First Name"
-              name="name"
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              sx={{flex: '3 1 0%',}}
-            />
-            <TextField
-            size = "small"
-              label="Last Name"
-              name="lastName"
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              sx={{flex: '2 1 0%',}}
-            />
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              <TextField
+                size="small"
+                label="First Name"
+                name="name"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                sx={{ flex: '3 1 0%' }}
+                inputProps={{ pattern: "[A-Za-z]*", title: "First Name should not contain numbers" }}
+              />
+              <TextField
+                size="small"
+                label="Last Name"
+                name="lastName"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                sx={{ flex: '2 1 0%' }}
+                inputProps={{ pattern: "[A-Za-z]*", title: "Last Name should not contain numbers" }}
+              />
             </Box>
             <TextField
-            size = "small"
+              size="small"
               label="Email Address"
               name="email"
               variant="outlined"
@@ -164,7 +204,7 @@ function SignUpPage() {
               fullWidth
             />
             <TextField
-            size = "small"
+              size="small"
               label="Password"
               name="password"
               variant="outlined"
@@ -174,7 +214,7 @@ function SignUpPage() {
               fullWidth
             />
             <TextField
-            size = "small"
+              size="small"
               label="Re-enter Password"
               name="confirmPassword"
               variant="outlined"
@@ -182,7 +222,6 @@ function SignUpPage() {
               margin="normal"
               required
               fullWidth
-
             />
             <Button
               type="submit"
@@ -211,6 +250,7 @@ function SignUpPage() {
         </Paper>
       </Container>
     </Box>
+    </>
   );
 }
 

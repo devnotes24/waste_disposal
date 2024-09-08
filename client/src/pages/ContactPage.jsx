@@ -1,20 +1,16 @@
 import { Box, Typography, Grid, Paper, List, ListItem, ListItemText } from '@mui/material';
 import ContactMail from '@mui/icons-material/ContactMail';
 import LocationOn from '@mui/icons-material/LocationOn';
-import Phone from '@mui/icons-material/Phone';
-
-const contactInfo = [
-  { icon: <Phone />, text: '+1-234-567-890' },
-  { icon: <ContactMail />, text: 'info@example.com' },
-  { icon: <LocationOn />, text: '1234 Disposal St, City, Country' },
-];
 
 function ContactPage() {
+  const address = "#23, 1st Main, 3rd Cross, Kuvempunagara, Bengaluru - 560019.";
+  const googleMapsUrl = `https://www.google.com/maps/search/1st+Main,+3rd+Cross,+Kuvempunagara,+Bengaluru+-+560019./@13.0700857,77.5395393,18.46z?entry=ttu&g_ep=EgoyMDI0MDkwNC4wIKXMDSoASAFQAw%3D%3D`;
+
   return (
     <Box
       sx={{
         mb: 4,
-        mt: { xs: 2, sm: 3, md: 6},
+        mt: { xs: 2, sm: 3, md: 6 },
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -27,6 +23,7 @@ function ContactPage() {
         sx={{
           mb: 4,
           fontWeight: 'bold',
+          fontSize: { xs: '30px', sm: '45px', md: '52px', lg: '64px' }
         }}
       >
         Contact Us
@@ -38,7 +35,7 @@ function ContactPage() {
             elevation={3}
             sx={{
               p: 1,
-              m : 2,
+              m: 2,
               borderRadius: 2,
               display: 'flex',
               flexDirection: 'column',
@@ -47,22 +44,41 @@ function ContactPage() {
               textAlign: 'center',
             }}
           >
-            <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
+            <Typography
+              variant="h6"
+              component="h3"
+              sx={{ mb: 2, fontSize: { xs: '20px', sm: '35px', md: '42px' } }}
+            >
               Get in Touch
             </Typography>
             <List>
-              {contactInfo.map((item, index) => (
-                <ListItem key={index}>
-                  <ListItemText
-                    primary={
-                      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Box sx={{ mr: 1 }}>{item.icon}</Box>
-                        {item.text}
-                      </Box>
-                    }
-                  />
-                </ListItem>
-              ))}
+              <ListItem>
+                <ListItemText
+                  primary={
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                      <Typography sx={{ fontSize: { xs: '24px', sm: '30px', md: '30px' }, textAlign: 'center' }}>
+                        <Box sx={{ mr: 1 }}><ContactMail /></Box>{"ecosort3@gmail.com"}
+                      </Typography>
+                    </Box>
+                  }
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemText
+                  primary={
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                      <Typography
+                        sx={{ fontSize: { xs: '24px', sm: '30px', md: '30px' }, textAlign: 'center' }}
+                      >
+                        <Box sx={{ mr: 1 }}><LocationOn /></Box>
+                        <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                          {address}
+                        </a>
+                      </Typography>
+                    </Box>
+                  }
+                />
+              </ListItem>
             </List>
           </Paper>
         </Grid>
