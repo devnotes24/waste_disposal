@@ -28,9 +28,10 @@ function AboutPage() {
           sx={{
             mb: 2,
             color: '#555',
-            maxWidth: 700,
+            maxWidth: 1100,
             mx: 'auto',
             lineHeight: 1.4,
+            fontSize : {sx : "20px" , sm : "28px"}
           }}
         >
           Welcome to our platform, where we help you find the best locations for disposing of various types of waste. Our service provides valuable information on where to dispose of wood, plastic, electronic, and medical waste. We connect you with nearby disposal centers to make recycling and waste management easier and more efficient. Your contributions help us keep the environment clean and sustainable.
@@ -56,9 +57,10 @@ function AboutPage() {
           sx={{
             mb: 2,
             color: '#555',
-            maxWidth: 700,
+            maxWidth: 1100,
             mx: 'auto',
             lineHeight: 1.4,
+            fontSize : {sx : "20px" , sm : "28px"}
           }}
         >
           Our goal is to provide accurate and accessible information on waste disposal. We aim to make it easy for individuals and businesses to find proper disposal facilities for different types of waste. By using our platform, you contribute to a cleaner and healthier environment.
@@ -70,9 +72,10 @@ function AboutPage() {
           sx={{
             mb: 2,
             color: '#555',
-            maxWidth: 700,
+            maxWidth: 1100,
             mx: 'auto',
             lineHeight: 1.4,
+            fontSize : {sx : "20px" , sm : "28px"}
           }}
         >
           Join us in our mission to improve waste management practices and promote sustainability in your community.
