@@ -37,3 +37,4 @@ const createUserModel = (connection) => {
   return connection.model('User', regLoginSchema);
 };
 module.exports = createUserModel;
+

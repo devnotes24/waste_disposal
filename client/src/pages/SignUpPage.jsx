@@ -15,7 +15,7 @@ function SignUpPage() {
 
   // Validation functions
   function isAlphaOnly(str) {
-    return /^[A-Za-z]+$/.test(str);
+    return /^[A-Za-z ]+$/.test(str);
   }
 
   function isValidEmail(email) {
